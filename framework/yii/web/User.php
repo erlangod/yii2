@@ -20,6 +20,14 @@ use yii\base\InvalidConfigException;
  * User works with a class implementing the [[Identity]] interface. This class implements
  * the actual user authentication logic and is often backed by a user database table.
  *
+ * @property string|integer $id The unique identifier for the user. If null, it means the user is a guest.
+ * This property is read-only.
+ * @property Identity $identity The identity object associated with the currently logged user. Null is
+ * returned if the user is not logged in (not authenticated).
+ * @property boolean $isGuest Whether the current user is a guest. This property is read-only.
+ * @property string $returnUrl The URL that the user should be redirected to after login. Note that the type
+ * of this property differs in getter and setter. See [[getReturnUrl()]] and [[setReturnUrl()]] for details.
+ *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */

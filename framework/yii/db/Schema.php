@@ -19,9 +19,12 @@ use yii\caching\GroupDependency;
  *
  * Schema represents the database schema information that is DBMS specific.
  *
- * @property QueryBuilder $queryBuilder the query builder for the DBMS represented by this schema
- * @property array $tableNames the names of all tables in this database.
- * @property array $tableSchemas the schema information for all tables in this database.
+ * @property string $lastInsertID The row ID of the last row inserted, or the last value retrieved from the
+ * sequence object. This property is read-only.
+ * @property QueryBuilder $queryBuilder The query builder for this connection. This property is read-only.
+ * @property string[] $tableNames All table names in the database. This property is read-only.
+ * @property TableSchema[] $tableSchemas The metadata for all tables in the database. Each array element is an
+ * instance of [[TableSchema]] or its child class. This property is read-only.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
@@ -138,7 +141,7 @@ abstract class Schema extends Object
 	 * @param string $schema the schema of the tables. Defaults to empty string, meaning the current or default schema name.
 	 * @param boolean $refresh whether to fetch the latest available table schemas. If this is false,
 	 * cached data may be returned if available.
-	 * @return array the metadata for all tables in the database.
+	 * @return TableSchema[] the metadata for all tables in the database.
 	 * Each array element is an instance of [[TableSchema]] or its child class.
 	 */
 	public function getTableSchemas($schema = '', $refresh = false)
@@ -161,7 +164,7 @@ abstract class Schema extends Object
 	 * If not empty, the returned table names will be prefixed with the schema name.
 	 * @param boolean $refresh whether to fetch the latest available table names. If this is false,
 	 * table names fetched previously (if available) will be returned.
-	 * @return array all table names in the database.
+	 * @return string[] all table names in the database.
 	 */
 	public function getTableNames($schema = '', $refresh = false)
 	{
